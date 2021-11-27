@@ -11,7 +11,10 @@ import MonsterCard from '../../components/MonsterCard'
             <div className={styles.container}>
               {props.monsters.map(monster =>
                 <MonsterCard 
-                key={monster._id} monster={monster}/>
+                key={monster._id} 
+                monster={monster}
+                handleDeleteMonster={props.handleDeleteMonster}
+                />
               )}
             </div>
           </>

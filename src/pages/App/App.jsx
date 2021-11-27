@@ -21,6 +21,11 @@ function App() {
     .then(allMonsters => setMonsters(allMonsters))
   }, [])
 
+  const handleDeleteMonster = id => {
+    monsterService.deleteOne(id)
+    .then(setMonsters(monsters.filter(monster =>monster._id !== id)))
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -33,7 +38,7 @@ function App() {
       <main>
         <Routes>
           <Route path='/add' element={<AddMonster handleAddMonster={handleAddMonster} />}/>
-          <Route exact path='/' element={<MonsterList monsters={monsters} />}/>
+          <Route path='/' element={<MonsterList handleDeleteMonster={handleDeleteMonster} monsters={monsters} />} />
         </Routes>
       </main>
     </div>
