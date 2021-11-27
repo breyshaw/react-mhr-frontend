@@ -1,26 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react'
 
 function AddMonster(props) {
-    const [validForm, setValidForm] = useState(false)
-    //Building a piece of state caled formData
-    const [formData, setFormData] = useState({
-        name: '',
-        imgUrl: '',
-        type: '',
-        topweakness: '',
-    })
-    const formElement = useRef()
+	const [validForm, setValidForm] = useState(false)
+	//Building a piece of state caled formData
+	const [formData, setFormData] = useState({
+		name: '',
+		imgUrl: '',
+		type: '',
+		topweakness: '',
+	})
+	const formElement = useRef()
 
-    const handleChange = evt => {
-		setFormData({ ...formData, 
-        [evt.target.name]: evt.target.value })
+	const handleChange = evt => {
+		setFormData({
+			...formData,
+			[evt.target.name]: evt.target.value
+		})
 	}
-    
-    const handleSubmit = evt => {
-        evt.preventDefault()
-        props.handleAddMonster(formData)
-    }
-    useEffect(() => {
+
+	const handleSubmit = evt => {
+		evt.preventDefault()
+		props.handleAddMonster(formData)
+	}
+	useEffect(() => {
 		formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
 	}, [formData])
 
@@ -33,40 +35,40 @@ function AddMonster(props) {
 					<label htmlFor="name-input" className="form-label">
 						Monster Name (required)
 					</label>
-					<input 
+					<input
 						type="text"
 						className="form-control"
 						id="name-input"
 						name="name"
-                        value={formData.name}
-                        onChange={handleChange}
+						value={formData.name}
+						onChange={handleChange}
 						required
 					/>
 				</div>
-                <div className="form-group mb-3">
+				<div className="form-group mb-3">
 					<label htmlFor="breed-input" className="form-label">
 						Monster Image Url:
 					</label>
-					<input 
+					<input
 						type="text"
 						className="form-control"
 						id="breed-input"
 						name="imgUrl"
-                        value={formData.imgUrl}
-                        onChange={handleChange}
+						value={formData.imgUrl}
+						onChange={handleChange}
 					/>
 				</div>
 				<div className="form-group mb-3">
 					<label htmlFor="breed-input" className="form-label">
 						Monster Type (required)
 					</label>
-					<input 
+					<input
 						type="text"
 						className="form-control"
 						id="breed-input"
 						name="type"
-                        value={formData.type}
-                        onChange={handleChange}
+						value={formData.type}
+						onChange={handleChange}
 						required
 					/>
 				</div>
@@ -74,20 +76,20 @@ function AddMonster(props) {
 					<label htmlFor="age-input" className="form-label">
 						Monster Top-Weakness
 					</label>
-					<input 
+					<input
 						type="text"
 						className="form-control"
 						id="age-input"
 						name="topweakness"
-                        value={formData.topweakness}
-                        onChange={handleChange}
+						value={formData.topweakness}
+						onChange={handleChange}
 					/>
 				</div>
 				<div className="d-grid">
 					<button
 						type="submit"
 						className="btn btn-primary btn-fluid"
-                        disabled={!validForm}
+						disabled={!validForm}
 					>
 						Add Monster
 					</button>

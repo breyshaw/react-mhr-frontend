@@ -1,21 +1,21 @@
-import React, { useState, useRef, useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 function EditMonster(props) {
     const formElement = useRef()
     const [validForm, setValidForm] = useState(true)
     const handleChange = evt => {
-		setFormData({ ...formData, [evt.target.name]: evt.target.value })
-	}
+        setFormData({ ...formData, [evt.target.name]: evt.target.value })
+    }
     const location = useLocation()
     const [formData, setFormData] = useState(location.state.monster)
     useEffect(() => {
-		formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
-	}, [formData])
+        formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
+    }, [formData])
     const handleSubmit = evt => {
-		evt.preventDefault()
+        evt.preventDefault()
         props.handleUpdateMonster(formData)
-	}
+    }
     return (
         <>
             <h1>Edit Monster</h1>

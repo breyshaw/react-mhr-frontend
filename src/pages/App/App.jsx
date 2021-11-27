@@ -6,7 +6,6 @@ import MonsterList from '../MonsterList/MonsterList'
 import EditMonster from '../EditMonster/EditMonster'
 import * as monsterService from '../../services/monsters'
 
-
 function App() {
   const navigate = useNavigate()
   const [monsters, setMonsters] = useState([])
@@ -19,32 +18,29 @@ function App() {
 
   useEffect(() => {
     monsterService.getAll()
-    .then(allMonsters => setMonsters(allMonsters))
+      .then(allMonsters => setMonsters(allMonsters))
   }, [])
 
   const handleDeleteMonster = id => {
     monsterService.deleteOne(id)
-    .then(setMonsters(monsters.filter(monster =>monster._id !== id)))
+      .then(setMonsters(monsters.filter(monster => monster._id !== id)))
   }
 
-
-
-	const handleUpdateMonster = updatedMonsterData => {
+  const handleUpdateMonster = updatedMonsterData => {
     monsterService.update(updatedMonsterData)
-    .then(updatedMonster => {
-      const newMonstersArray = monsters.map(monster => 
-        monster._id === updatedMonster._id ? updatedMonster : monster
-      )
-      setMonsters(newMonstersArray)
-			navigate('/')
-    })
+      .then(updatedMonster => {
+        const newMonstersArray = monsters.map(monster =>
+          monster._id === updatedMonster._id ? updatedMonster : monster
+        )
+        setMonsters(newMonstersArray)
+        navigate('/')
+      })
   }
-
 
   return (
     <div className="App">
       <header className="App-header">
-        Monster Hunter Rise Quick Guide
+        MHR Quick Reference
         <nav>
           <NavLink to='/'>Monster List</NavLink>
           <NavLink className='m-left' to='/add'>Add Monster</NavLink>
@@ -52,7 +48,7 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path='/add' element={<AddMonster handleAddMonster={handleAddMonster} />}/>
+          <Route path='/add' element={<AddMonster handleAddMonster={handleAddMonster} />} />
           <Route path='/' element={<MonsterList handleDeleteMonster={handleDeleteMonster} monsters={monsters} />} />
           <Route path='/edit' element={<EditMonster handleUpdateMonster={handleUpdateMonster} />} />
         </Routes>
