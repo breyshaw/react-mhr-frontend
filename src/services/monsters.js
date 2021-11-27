@@ -19,8 +19,18 @@ function deleteOne(id) {
     .then(res => res.json())
 }
 
+function update(monster) {
+    return fetch(`${BASE_URL}/${monster._id}`, {
+        method: 'PUT',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(monster)
+})
+.then(res => res.json())
+}
+
 export {
     create,
     getAll,
-    deleteOne
+    deleteOne,
+    update
 }

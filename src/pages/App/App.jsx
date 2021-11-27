@@ -27,6 +27,20 @@ function App() {
     .then(setMonsters(monsters.filter(monster =>monster._id !== id)))
   }
 
+
+
+	const handleUpdateMonster = updatedMonsterData => {
+    monsterService.update(updatedMonsterData)
+    .then(updatedMonster => {
+      const newMonstersArray = monsters.map(monster => 
+        monster._id === updatedMonster._id ? updatedMonster : monster
+      )
+      setMonsters(newMonstersArray)
+			navigate('/')
+    })
+  }
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -40,7 +54,7 @@ function App() {
         <Routes>
           <Route path='/add' element={<AddMonster handleAddMonster={handleAddMonster} />}/>
           <Route path='/' element={<MonsterList handleDeleteMonster={handleDeleteMonster} monsters={monsters} />} />
-          <Route path='/edit' element={<EditMonster />} />
+          <Route path='/edit' element={<EditMonster handleUpdateMonster={handleUpdateMonster} />} />
         </Routes>
       </main>
     </div>
