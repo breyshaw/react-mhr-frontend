@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Route, Routes, NavLink, useNavigate } from 'react-router-dom'
 import './App.css'
 import AddMonster from '../AddMonster/AddMonster'
+import MonsterList from '../MonsterList/MonsterList'
 import * as monsterService from '../../services/monsters'
 
+
 function App() {
+  const navigate = useNavigate()
   const [monsters, setMonsters] = useState([])
 
   const handleAddMonster = async newMonsterData => {
     const newMonster = await monsterService.create(newMonsterData)
     setMonsters([...monsters, newMonster])
+    navigate('/')
   }
 
   useEffect(() => {
@@ -29,6 +33,7 @@ function App() {
       <main>
         <Routes>
           <Route path='/add' element={<AddMonster handleAddMonster={handleAddMonster} />}/>
+          <Route exact path='/' element={<MonsterList monsters={monsters} />}/>
         </Routes>
       </main>
     </div>
