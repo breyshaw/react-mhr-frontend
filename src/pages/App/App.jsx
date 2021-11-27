@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
-import { Route, Routes, NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Route, Routes, NavLink, useNavigate } from 'react-router-dom'
 import './App.css'
 import AddMonster from '../AddMonster/AddMonster'
+import * as monsterService from '../../services/monsters'
 
 function App() {
   const [monsters, setMonsters] = useState([])
 
-  const handleAddMonster = newMonsterData => {
-    setMonsters([...monsters, newMonsterData])
+  const handleAddMonster = async newMonsterData => {
+    const newMonster = await monsterService.create(newMonsterData)
+    setMonsters([...monsters, newMonster])
   }
+
+  useEffect(() => {
+    monsterService.getAll()
+    .then(allMonsters => setMonsters(allMonsters))
+  }, [])
 
   return (
     <div className="App">

@@ -10,18 +10,20 @@ function AddMonster(props) {
         topweakness: '',
     })
     const formElement = useRef()
-    const handleChange = evt => {
-		setFormData({ ...formData, [evt.target.name]: evt.target.value })
-	}
 
+    const handleChange = evt => {
+		setFormData({ ...formData, 
+        [evt.target.name]: evt.target.value })
+	}
+    
+    const handleSubmit = evt => {
+        evt.preventDefault()
+        props.handleAddMonster(formData)
+    }
     useEffect(() => {
 		formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
 	}, [formData])
 
-    const handleSubmit = evt => {
-        evt.preventDefault()
-        props.AddMonster(formData)
-    }
 
 	return (
 		<>
