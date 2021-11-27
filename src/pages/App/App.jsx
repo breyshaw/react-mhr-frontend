@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Route, Routes, NavLink } from 'react-router-dom'
 import './App.css'
+import AddMonster from '../AddMonster/AddMonster'
 
 function App() {
   const [monsters, setMonsters] = useState([])
@@ -15,7 +16,9 @@ function App() {
         </nav>
       </header>
       <main>
-        
+        <Routes>
+          <Route path='/add' element={<AddMonster />}/>
+        </Routes>
       </main>
     </div>
   )
