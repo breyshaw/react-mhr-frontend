@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 function AddMonster(props) {
+    const [validForm, setValidForm] = useState(false)
     //Building a piece of state caled formData
     const [formData, setFormData] = useState({
         name: '',
@@ -8,15 +9,24 @@ function AddMonster(props) {
         type: '',
         topweakness: '',
     })
-
+    const formElement = useRef()
     const handleChange = evt => {
 		setFormData({ ...formData, [evt.target.name]: evt.target.value })
 	}
 
+    useEffect(() => {
+		formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
+	}, [formData])
+
+    const handleSubmit = evt => {
+        evt.preventDefault()
+        props.AddMonster(formData)
+    }
+
 	return (
 		<>
 			<h1>Add Monster</h1>
-			<form autoComplete="off">
+			<form autoComplete="off" ref={formElement} onSubmit={handleSubmit}>
 				<div className="form-group mb-3">
 					<label htmlFor="name-input" className="form-label">
 						Monster Name (required)
@@ -75,6 +85,7 @@ function AddMonster(props) {
 					<button
 						type="submit"
 						className="btn btn-primary btn-fluid"
+                        disabled={!validForm}
 					>
 						Add Monster
 					</button>
