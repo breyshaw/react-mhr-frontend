@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function MonsterCard({monster, handleDeleteMonster}) {
   return(
@@ -9,6 +10,13 @@ function MonsterCard({monster, handleDeleteMonster}) {
         <p className="card-text">{monster.type}</p>
         <p className="card-text">{monster.topweakness}</p>
         <div className="card-footer">
+        <Link
+          className='btn btn-sm btn-warning'
+          to='/edit'
+          state={{monster}}
+        >
+          Edit
+        </Link>
         <button className="btn btn-sm btn-danger m-left"
         onClick={() => handleDeleteMonster(monster._id)}
         >

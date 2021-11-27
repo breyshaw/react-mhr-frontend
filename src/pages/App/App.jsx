@@ -3,6 +3,7 @@ import { Route, Routes, NavLink, useNavigate } from 'react-router-dom'
 import './App.css'
 import AddMonster from '../AddMonster/AddMonster'
 import MonsterList from '../MonsterList/MonsterList'
+import EditMonster from '../EditMonster/EditMonster'
 import * as monsterService from '../../services/monsters'
 
 
@@ -39,6 +40,7 @@ function App() {
         <Routes>
           <Route path='/add' element={<AddMonster handleAddMonster={handleAddMonster} />}/>
           <Route path='/' element={<MonsterList handleDeleteMonster={handleDeleteMonster} monsters={monsters} />} />
+          <Route path='/edit' element={<EditMonster />} />
         </Routes>
       </main>
     </div>
